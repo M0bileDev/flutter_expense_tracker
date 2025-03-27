@@ -1,3 +1,4 @@
+import 'package:expence_tracker/models/expense.dart';
 import 'package:flutter/material.dart';
 
 class NewExpense extends StatefulWidget {
@@ -19,16 +20,24 @@ class _NewExpenseState extends State<NewExpense> {
 
   final _titleController = TextEditingController();
   final _amountController = TextEditingController();
+  DateTime? _selectedDate;
 
-  void _showDatePicker() {
+  void _showDatePicker() async {
     final now = DateTime.now();
     final firstDate = DateTime(now.year - 1, now.month, now.day);
-    showDatePicker(
+    var pickedDate = await showDatePicker(
       context: context,
       initialDate: now,
       firstDate: firstDate,
       lastDate: now,
-    );
+    )
+        // 💡One of the way to get value using the Future technique
+        // .then((value){})
+        ;
+
+    setState(() {
+      _selectedDate = pickedDate;
+    });
   }
 
 //💡 Only State class can implement dispose method
@@ -76,7 +85,9 @@ class _NewExpenseState extends State<NewExpense> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      'Selected date',
+                      _selectedDate == null
+                          ? 'No date selected'
+                          : dateFormatter.format(_selectedDate!),
                     ),
                     IconButton(
                       onPressed: _showDatePicker,
