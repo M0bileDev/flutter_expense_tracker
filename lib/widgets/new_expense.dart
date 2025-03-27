@@ -18,7 +18,7 @@ class _NewExpenseState extends State<NewExpense> {
   // }
 
   final _titleController = TextEditingController();
-
+  final _amountController = TextEditingController();
 //💡 Only State class can implement dispose method
   @override
   void dispose() {
@@ -26,6 +26,7 @@ class _NewExpenseState extends State<NewExpense> {
     //💡 We have to run this because, Flutter by itself won't clean
     //object of TextEditingController
     _titleController.dispose();
+    _amountController.dispose();
   }
 
   @override
@@ -42,11 +43,24 @@ class _NewExpenseState extends State<NewExpense> {
               label: Text('Title'),
             ),
           ),
+          TextField(
+            controller: _amountController,
+            keyboardType: TextInputType.number,
+            decoration: InputDecoration(
+              label: Text('Amount'),
+              prefixText: '\$ ',
+            ),
+          ),
           Row(
             children: [
+              TextButton(
+                onPressed: () {},
+                child: Text('Cancel'),
+              ),
               ElevatedButton(
                 onPressed: () {
                   print(_titleController.text);
+                  print(_amountController.text);
                 },
                 child: Text('Save'),
               )
