@@ -1,5 +1,6 @@
 import 'package:expence_tracker/widgets/expenses_list/expenses_list.dart';
 import 'package:expence_tracker/models/expense.dart';
+import 'package:expence_tracker/widgets/new_expense.dart';
 import 'package:flutter/material.dart';
 
 class Expenses extends StatefulWidget {
@@ -35,9 +36,7 @@ class _ExpensesState extends State<Expenses> {
   void _openAddExpenseOverlay() {
     showModalBottomSheet(
       context: context,
-      builder: (context) => Text(
-        'Dummy data',
-      ),
+      builder: (context) => NewExpense(),
     );
   }
 
