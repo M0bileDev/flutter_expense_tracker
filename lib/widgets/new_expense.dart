@@ -10,10 +10,22 @@ class NewExpense extends StatefulWidget {
 }
 
 class _NewExpenseState extends State<NewExpense> {
-  var _enteredTitle = '';
+  //💡 One of the sollution to react and hold text input
+  // var _enteredTitle = '';
 
-  void _saveTitleInput(String title) {
-    _enteredTitle = title;
+  // void _saveTitleInput(String title) {
+  //   _enteredTitle = title;
+  // }
+
+  final _titleController = TextEditingController();
+
+//💡 Only State class can implement dispose method
+  @override
+  void dispose() {
+    super.dispose();
+    //💡 We have to run this because, Flutter by itself won't clean
+    //object of TextEditingController
+    _titleController.dispose();
   }
 
   @override
@@ -23,7 +35,8 @@ class _NewExpenseState extends State<NewExpense> {
       child: Column(
         children: [
           TextField(
-            onChanged: _saveTitleInput,
+            // onChanged: _saveTitleInput,
+            controller: _titleController,
             maxLength: 50,
             decoration: InputDecoration(
               label: Text('Title'),
@@ -33,7 +46,7 @@ class _NewExpenseState extends State<NewExpense> {
             children: [
               ElevatedButton(
                 onPressed: () {
-                  print(_enteredTitle);
+                  print(_titleController.text);
                 },
                 child: Text('Save'),
               )
