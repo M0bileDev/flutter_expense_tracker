@@ -11,6 +11,11 @@ class Expenses extends StatefulWidget {
   }
 }
 
+/*💡State class provieds global context variable
+  Context -> Widget metadata information.
+  More: It contains information about the widget and relation 
+  to other widgets like position...
+*/
 class _ExpensesState extends State<Expenses> {
   final List<Expense> _registeredExpenses = [
     Expense(
@@ -27,6 +32,15 @@ class _ExpensesState extends State<Expenses> {
     ),
   ];
 
+  void _openAddExpenseOverlay() {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) => Text(
+        'Dummy data',
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +48,7 @@ class _ExpensesState extends State<Expenses> {
         title: Text('Expense Tracker'),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: _openAddExpenseOverlay,
             icon: Icon(Icons.add),
           )
         ],
