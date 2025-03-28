@@ -41,6 +41,19 @@ class _NewExpenseState extends State<NewExpense> {
     });
   }
 
+  void _submitExpenseData() {
+    final enteredAmount = double.tryParse(_amountController.text);
+    if (enteredAmount == null || enteredAmount < 0) {
+      //showe some error
+    }
+    if (_titleController.text.trim().isEmpty) {
+      //show some eroor
+    }
+    if (_selectedDate == null) {
+      //show some error
+    }
+  }
+
 //💡 Only State class can implement dispose method
   @override
   void dispose() {
@@ -126,10 +139,7 @@ class _NewExpenseState extends State<NewExpense> {
                 child: Text('Cancel'),
               ),
               ElevatedButton(
-                onPressed: () {
-                  print(_titleController.text);
-                  print(_amountController.text);
-                },
+                onPressed: _submitExpenseData,
                 child: Text('Save'),
               )
             ],
