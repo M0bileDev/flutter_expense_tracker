@@ -44,14 +44,54 @@ class _NewExpenseState extends State<NewExpense> {
   void _submitExpenseData() {
     final enteredAmount = double.tryParse(_amountController.text);
     if (enteredAmount == null || enteredAmount < 0) {
-      //showe some error
+      showDialog(
+        context: context,
+        builder: (buildContext) => AlertDialog(
+          title: Text('Invalid amount.'),
+          content: Text('Please make sure that valid amount was entered.'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('OK'),
+            )
+          ],
+        ),
+      );
+      return;
     }
     if (_titleController.text.trim().isEmpty) {
-      //show some eroor
+      showDialog(
+        context: context,
+        builder: (buildContext) => AlertDialog(
+          title: Text('Invalid title.'),
+          content: Text('Please make sure that valid title was entered.'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('OK'),
+            )
+          ],
+        ),
+      );
+      return;
     }
     if (_selectedDate == null) {
-      //show some error
+      showDialog(
+        context: context,
+        builder: (buildContext) => AlertDialog(
+          title: Text('Invalid date.'),
+          content: Text('Please make sure that valid date was selected.'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('OK'),
+            )
+          ],
+        ),
+      );
+      return;
     }
+    Navigator.pop(context);
   }
 
 //💡 Only State class can implement dispose method
