@@ -22,6 +22,12 @@ class ExpensesList extends StatelessWidget {
       itemBuilder: (builderContext, index) => Dismissible(
         //💡 key exists to make widgets identifiable
         onDismissed: (direction) => onRemove(expenses[index]),
+        background: Container(
+          color: Theme.of(context).colorScheme.error.withAlpha(200),
+          margin: EdgeInsets.symmetric(
+            horizontal: Theme.of(context).cardTheme.margin!.horizontal,
+          ),
+        ),
         key: ValueKey(expenses[index]),
         child: ExpenseItem(expenses[index]),
       ),
