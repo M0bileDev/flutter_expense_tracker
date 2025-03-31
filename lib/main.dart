@@ -3,10 +3,27 @@ import 'package:expence_tracker/widgets/expenses.dart';
 
 //💡 'k' means global varaibles, especially for styles
 final kColorScheme = ColorScheme.fromSeed(seedColor: Colors.white);
+final kDarkColorScheme = ColorScheme.fromSeed(
+  seedColor: Colors.black,
+  brightness: Brightness.dark,
+);
 
 void main() {
   runApp(
     MaterialApp(
+      darkTheme: ThemeData.dark().copyWith(
+        colorScheme: kDarkColorScheme,
+        cardTheme: CardTheme().copyWith(
+          color: kDarkColorScheme.secondaryContainer,
+          margin: EdgeInsets.all(8),
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: kDarkColorScheme.primaryContainer,
+            foregroundColor: kDarkColorScheme.onPrimaryContainer,
+          ),
+        ),
+      ),
       theme: ThemeData(
         useMaterial3: true,
         //💡 Easiest and recommended way to configure colors
@@ -33,6 +50,7 @@ void main() {
               ),
             ),
       ),
+      //💡 default -> themeMode: ThemeMode.system,
       home: Expenses(),
     ),
   );
