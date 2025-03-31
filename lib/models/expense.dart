@@ -43,3 +43,20 @@ class Expense {
     return dateFormatter.format(date);
   }
 }
+
+class ExpenseBucket {
+  ExpenseBucket(this.category, this.expenses);
+
+  final Category category;
+  final List<Expense> expenses;
+
+  double get totalExpenses {
+    double sum = 0;
+
+    for (final expense in expenses) {
+      sum += expense.amount;
+    }
+
+    return sum;
+  }
+}
