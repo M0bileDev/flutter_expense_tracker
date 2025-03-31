@@ -45,7 +45,17 @@ class Expense {
 }
 
 class ExpenseBucket {
-  ExpenseBucket(this.category, this.expenses);
+  ExpenseBucket(
+    this.expenses,
+    this.category,
+  );
+
+  ExpenseBucket.fromCategory(
+    List<Expense> allExpenses,
+    this.category,
+  ) : expenses = allExpenses
+            .where((element) => element.category == category)
+            .toList();
 
   final Category category;
   final List<Expense> expenses;
