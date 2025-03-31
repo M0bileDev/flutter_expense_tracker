@@ -15,7 +15,7 @@ void main() {
         colorScheme: kDarkColorScheme,
         cardTheme: CardTheme().copyWith(
           color: kDarkColorScheme.secondaryContainer,
-          margin: EdgeInsets.all(8),
+          margin: EdgeInsets.all(16),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
@@ -35,7 +35,7 @@ void main() {
         ),
         cardTheme: CardTheme().copyWith(
           color: kColorScheme.secondaryContainer,
-          margin: EdgeInsets.all(8),
+          margin: EdgeInsets.all(16),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(

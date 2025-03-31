@@ -50,7 +50,7 @@ class ExpenseBucket {
     this.category,
   );
 
-  ExpenseBucket.fromCategory(
+  ExpenseBucket.forCategory(
     List<Expense> allExpenses,
     this.category,
   ) : expenses = allExpenses
