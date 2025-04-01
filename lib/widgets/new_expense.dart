@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:expence_tracker/models/expense.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class NewExpense extends StatefulWidget {
@@ -43,14 +46,13 @@ class _NewExpenseState extends State<NewExpense> {
     });
   }
 
-  void _submitExpenseData() {
-    final enteredAmount = double.tryParse(_amountController.text);
-    if (enteredAmount == null || enteredAmount < 0) {
-      showDialog(
+  void _showTitleErrorDialog() {
+    if (Platform.isIOS) {
+      showCupertinoDialog(
         context: context,
-        builder: (buildContext) => AlertDialog(
-          title: Text('Invalid amount.'),
-          content: Text('Please make sure that valid amount was entered.'),
+        builder: (buildContext) => CupertinoAlertDialog(
+          title: Text('Invalid title.'),
+          content: Text('Please make sure that valid title was entered.'),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
@@ -59,9 +61,7 @@ class _NewExpenseState extends State<NewExpense> {
           ],
         ),
       );
-      return;
-    }
-    if (_titleController.text.trim().isEmpty) {
+    } else {
       showDialog(
         context: context,
         builder: (buildContext) => AlertDialog(
@@ -75,9 +75,57 @@ class _NewExpenseState extends State<NewExpense> {
           ],
         ),
       );
-      return;
     }
-    if (_selectedDate == null) {
+  }
+
+  void _showAmountErrorDialog() {
+    if (Platform.isIOS) {
+      showCupertinoDialog(
+        context: context,
+        builder: (buildContext) => CupertinoAlertDialog(
+          title: Text('Invalid amount.'),
+          content: Text('Please make sure that valid amount was entered.'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('OK'),
+            )
+          ],
+        ),
+      );
+    } else {
+      showDialog(
+        context: context,
+        builder: (buildContext) => AlertDialog(
+          title: Text('Invalid amount.'),
+          content: Text('Please make sure that valid amount was entered.'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('OK'),
+            )
+          ],
+        ),
+      );
+    }
+  }
+
+  void _showDateErrorDialog() {
+    if (Platform.isIOS) {
+      showCupertinoDialog(
+        context: context,
+        builder: (buildContext) => CupertinoAlertDialog(
+          title: Text('Invalid date.'),
+          content: Text('Please make sure that valid date was selected.'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('OK'),
+            )
+          ],
+        ),
+      );
+    } else {
       showDialog(
         context: context,
         builder: (buildContext) => AlertDialog(
@@ -91,6 +139,21 @@ class _NewExpenseState extends State<NewExpense> {
           ],
         ),
       );
+    }
+  }
+
+  void _submitExpenseData() {
+    final enteredAmount = double.tryParse(_amountController.text);
+    if (enteredAmount == null || enteredAmount < 0) {
+      _showAmountErrorDialog();
+      return;
+    }
+    if (_titleController.text.trim().isEmpty) {
+      _showTitleErrorDialog();
+      return;
+    }
+    if (_selectedDate == null) {
+      _showDateErrorDialog();
       return;
     }
     widget.onSave(
