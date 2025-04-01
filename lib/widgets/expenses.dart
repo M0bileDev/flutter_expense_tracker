@@ -36,6 +36,7 @@ class _ExpensesState extends State<Expenses> {
 
   void _openAddExpenseOverlay() {
     showModalBottomSheet(
+      useSafeArea: true,
       isScrollControlled: true,
       context: context,
       builder: (context) => NewExpense(
@@ -89,6 +90,7 @@ class _ExpensesState extends State<Expenses> {
       );
     }
 
+    //💡 Scaffold by default uses safe area
     return Scaffold(
       appBar: AppBar(
         title: Text('Expense Tracker'),
